@@ -19,6 +19,10 @@ impl Config {
     }
 }
 
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+    vec![]
+}
+
 pub fn run(config: Config) -> Result<(), Box<Error>> {
     let mut f = File::open(config.filename).expect("file not found");
 
@@ -29,4 +33,23 @@ pub fn run(config: Config) -> Result<(), Box<Error>> {
     println!("With text:\n{}", contents);
 
     Ok(())
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn one_result() {
+        let query = "duct";
+        let contents = "\
+Rust:
+safe, fast, productive.
+Pick three.";
+
+        assert_eq!(
+            vec!["safe, fast, productive."],
+            search(query, contents)
+        );
+    }
 }
