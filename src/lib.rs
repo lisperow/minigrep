@@ -12,8 +12,8 @@ impl Config {
         if args.len() < 3 {
             return Err("not enough arguments");
         }
-        let query = &args[1].clone();
-        let filename = &args[2].clone();
+        let query = args[1].clone();
+        let filename = args[2].clone();
 
         Ok(Config { query, filename })
     }
